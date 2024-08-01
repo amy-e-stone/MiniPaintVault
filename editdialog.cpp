@@ -23,13 +23,16 @@ EditDialog::~EditDialog()
  * cannot be changed. Here, they are used to populate the Edit window so the user can edit the fields, so we wouldn't want to change these values */
 
 // Populate the Edit window with the fields to be edited
-void EditDialog::setValues(const QString &brand, const QString &color, const QString &type, const QString &itemNumber, const QString &imagePath)
+void EditDialog::setValues(const QString &brand, const QString &color, const QString &itemNumber, const QString &type, const QString &collection, const QString &quantity, const QString &imagePath)
 {
     // setText(<variable>) sets the text of the input field (user's input) to the value of <variable>
     ui->inputBrand->setText(brand);
     ui->inputColor->setText(color);
-    ui->inputType->setCurrentText(type);
     ui->inputItemNum->setText(itemNumber);
+    ui->inputType->setText(type);
+    ui->inputCollection->setText(collection);
+    ui->inputQuantity->setText(quantity);
+
     // setPixmap(...): Sets the scaled image to be displayed in the labelImage widget.
     // QPixmap(imagePath): Loads the image from the file path stored in fileName
     ui->labelImage->setPixmap(QPixmap(imagePath).scaled(100, 100, Qt::KeepAspectRatio));
@@ -48,14 +51,24 @@ QString EditDialog::getColor() const
     return ui->inputColor->text();
 }
 
-QString EditDialog::getType() const
-{
-    return ui->inputType->currentText();
-}
-
 QString EditDialog::getItemNumber() const
 {
     return ui->inputItemNum->text();
+}
+
+QString EditDialog::getType() const
+{
+    return ui->inputType->text();
+}
+
+QString EditDialog::getCollection() const
+{
+    return ui->inputCollection->text();
+}
+
+QString EditDialog::getQuantity() const
+{
+    return ui->inputQuantity->text();
 }
 
 QString EditDialog::getImagePath() const

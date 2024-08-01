@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1064</width>
-    <height>669</height>
+    <width>1057</width>
+    <height>989</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@
           <x>10</x>
           <y>60</y>
           <width>221</width>
-          <height>170</height>
+          <height>272</height>
          </rect>
         </property>
         <layout class="QFormLayout" name="formLayout_2">
@@ -58,6 +58,13 @@
          <property name="bottomMargin">
           <number>5</number>
          </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelBrand">
+           <property name="text">
+            <string>Brand:</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="1">
           <widget class="QLineEdit" name="inputBrand"/>
          </item>
@@ -72,102 +79,73 @@
           <widget class="QLineEdit" name="inputColor"/>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="labelType">
-           <property name="text">
-            <string>Type:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="inputType">
-           <item>
-            <property name="text">
-             <string>Base</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Layer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Tone</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Medium</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Primer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Varnish</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Airbrush</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelBrand">
-           <property name="text">
-            <string>Brand:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="inputItemNum"/>
-         </item>
-         <item row="3" column="0">
           <widget class="QLabel" name="labelItemNum">
            <property name="text">
             <string>Item #:</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
-          <widget class="QPushButton" name="buttonUploadImage">
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="inputItemNum"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelType">
            <property name="text">
-            <string>Upload Image</string>
+            <string>Type:</string>
            </property>
           </widget>
          </item>
          <item row="4" column="0">
+          <widget class="QLabel" name="labelCollection">
+           <property name="text">
+            <string>Collection:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="inputCollection"/>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="labelQuantity">
+           <property name="text">
+            <string>Quantity:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="inputQuantity"/>
+         </item>
+         <item row="6" column="0">
           <widget class="QLabel" name="labelImageText">
            <property name="text">
             <string>Image:</string>
            </property>
           </widget>
          </item>
+         <item row="6" column="1">
+          <widget class="QPushButton" name="buttonUploadImage">
+           <property name="text">
+            <string>Upload Image</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QPushButton" name="buttonAddPaint">
+           <property name="text">
+            <string>Add Paint</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="inputType"/>
+         </item>
         </layout>
-       </widget>
-       <widget class="QPushButton" name="buttonAddPaint">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>230</y>
-          <width>80</width>
-          <height>18</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Add Paint</string>
-        </property>
        </widget>
        <widget class="QPushButton" name="buttonDisplayPaints">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>270</y>
+          <y>410</y>
           <width>111</width>
           <height>18</height>
          </rect>
@@ -193,7 +171,7 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>300</y>
+          <y>440</y>
           <width>811</width>
           <height>231</height>
          </rect>
@@ -214,7 +192,7 @@
          <rect>
           <x>10</x>
           <y>40</y>
-          <width>71</width>
+          <width>131</width>
           <height>16</height>
          </rect>
         </property>
@@ -239,7 +217,7 @@
         <property name="geometry">
          <rect>
           <x>110</x>
-          <y>540</y>
+          <y>680</y>
           <width>171</width>
           <height>18</height>
          </rect>
@@ -252,7 +230,7 @@
         <property name="geometry">
          <rect>
           <x>420</x>
-          <y>270</y>
+          <y>410</y>
           <width>80</width>
           <height>18</height>
          </rect>
@@ -265,7 +243,7 @@
         <property name="geometry">
          <rect>
           <x>740</x>
-          <y>540</y>
+          <y>680</y>
           <width>80</width>
           <height>18</height>
          </rect>
@@ -278,7 +256,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>540</y>
+          <y>680</y>
           <width>80</width>
           <height>18</height>
          </rect>
@@ -291,7 +269,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>270</y>
+          <y>410</y>
           <width>113</width>
           <height>24</height>
          </rect>
@@ -301,7 +279,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>250</y>
+          <y>390</y>
           <width>91</width>
           <height>16</height>
          </rect>
@@ -314,7 +292,7 @@
         <property name="geometry">
          <rect>
           <x>290</x>
-          <y>540</y>
+          <y>680</y>
           <width>171</width>
           <height>18</height>
          </rect>
@@ -327,7 +305,7 @@
         <property name="geometry">
          <rect>
           <x>290</x>
-          <y>560</y>
+          <y>700</y>
           <width>171</width>
           <height>18</height>
          </rect>
@@ -340,7 +318,7 @@
         <property name="geometry">
          <rect>
           <x>290</x>
-          <y>580</y>
+          <y>720</y>
           <width>171</width>
           <height>18</height>
          </rect>
@@ -366,7 +344,7 @@
         <property name="geometry">
          <rect>
           <x>568</x>
-          <y>270</y>
+          <y>410</y>
           <width>241</width>
           <height>20</height>
          </rect>

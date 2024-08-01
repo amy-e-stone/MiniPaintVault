@@ -47,8 +47,10 @@ void MainWindow::initializeDatabase()
                                "id INTEGER PRIMARY KEY AUTOINCREMENT, " // Define 'id' column with auto-increment with consecutive numbers
                                "brand TEXT, "
                                "color TEXT, "
-                               "type TEXT, "
                                "item_number TEXT, "
+                               "type TEXT, "
+                               "collection TEXT, "
+                               "quantity TEXT, "
                                "shopping_list BOOL DEFAULT 0, "
                                "image_path TEXT)";
 
@@ -65,21 +67,25 @@ void MainWindow::on_buttonAddPaint_clicked()
     // Retrieve the text entered by the user in the input fields named inputBrand, inputColor, etc., and storing that text in the QString variable named brand, color, etc.
     QString brand = ui->inputBrand->text();
     QString color = ui->inputColor->text();
-    QString type = ui->inputType->currentText();
     QString itemNumber = ui->inputItemNum->text();
+    QString type = ui->inputType->text();
+    QString collection = ui->inputCollection->text();
+    QString quantity = ui->inputQuantity->text();
     QString imagePath = selectedImagePath;
 
     // Create query object which allows the execution of SQL commands (e.g., SELECT, INSERT, UPDATE, DELETE) on the connected database.
     QSqlQuery query;
 
     // Prepare the query, inserting the new records brand, color etc. with the values :brand, :type, etc.
-    query.prepare("INSERT INTO paints (brand, color, type, item_number, image_path) VALUES (:brand, :color, :type, :item_number, :image_path)");
+    query.prepare("INSERT INTO paints (brand, color, item_number, type, collection, quantity, image_path) VALUES (:brand, :color, :item_number, :type, :collection, :quantity, :image_path)");
 
     // Bind the input variable values to the respective placeholders
     query.bindValue(":brand", brand);
     query.bindValue(":color", color);
-    query.bindValue(":type", type);
     query.bindValue(":item_number", itemNumber);
+    query.bindValue(":type", type);
+    query.bindValue(":collection", collection);
+    query.bindValue(":quantity", quantity);
     query.bindValue(":image_path", imagePath);
 
     // 'query.exec()' executes insert query that was prepared above
@@ -88,14 +94,16 @@ void MainWindow::on_buttonAddPaint_clicked()
         qDebug() << "Error inserting data: " << query.lastError();
     } else {
         // Display the added items to the list of added paints
-        ui->paintListWidget->addItem("Brand: " + brand + ", Color: " + color + ", Type: " + type + ", Item Number: " + itemNumber);
+        ui->paintListWidget->addItem("Brand: " + brand + ", Color: " + color + ", Item Number: " + itemNumber + ", Type: " + type + ", Collection: " + collection + ", Quantity: " + quantity);
     }
 
     // Clear the input fields
     ui->inputBrand->clear();
     ui->inputColor->clear();
-    ui->inputType->setCurrentIndex(0);
     ui->inputItemNum->clear();
+    ui->inputType->clear();
+    ui->inputCollection->clear();
+    ui->inputQuantity->clear();
     selectedImagePath.clear();
 }
 
@@ -106,17 +114,17 @@ void MainWindow::on_buttonDisplayPaints_clicked()
     ui->labelListTitle->setText("Viewing All Paints");
 
     // SQL command to select all paints and paint attributes
-    QSqlQuery query("SELECT id, brand, color, type, item_number, image_path FROM paints");
+    QSqlQuery query("SELECT id, brand, color, item_number, type, collection, quantity, image_path FROM paints");
 
     // Display the list in the table
     // Set column count and headers for QTableWidget, this includes 1 column for the checkboxes
-    ui->paintTableWidget->setColumnCount(6);
+    ui->paintTableWidget->setColumnCount(8);
 
     // Set the titles of each column in the table
     QStringList headers;
 
     // The first header is blank for the checkbox
-    headers << "" << "Brand" << "Color" << "Type" << "Item Number" << "Image";
+    headers << "" << "Brand" << "Color" << "Item Number" << "Type" << "Collection" << "Quantity" << "Image";
     ui->paintTableWidget->setHorizontalHeaderLabels(headers);
 
     // Clear existing rows (refresh if there is a list is already displayed)
@@ -143,8 +151,10 @@ void MainWindow::on_buttonDisplayPaints_clicked()
         // Need to convert to string because query.value(column_name) returns a 'QVariant' object that can hold any datatype
         ui->paintTableWidget->setItem(row, 1, new QTableWidgetItem(query.value("brand").toString()));
         ui->paintTableWidget->setItem(row, 2, new QTableWidgetItem(query.value("color").toString()));
-        ui->paintTableWidget->setItem(row, 3, new QTableWidgetItem(query.value("type").toString()));
-        ui->paintTableWidget->setItem(row, 4, new QTableWidgetItem(query.value("item_number").toString()));
+        ui->paintTableWidget->setItem(row, 3, new QTableWidgetItem(query.value("item_number").toString()));
+        ui->paintTableWidget->setItem(row, 4, new QTableWidgetItem(query.value("type").toString()));
+        ui->paintTableWidget->setItem(row, 5, new QTableWidgetItem(query.value("collection").toString()));
+        ui->paintTableWidget->setItem(row, 6, new QTableWidgetItem(query.value("quantity").toString()));
 
         // Display the image
         QString imagePath = query.value("image_path").toString();
@@ -159,7 +169,7 @@ void MainWindow::on_buttonDisplayPaints_clicked()
             // Store the image path in the QLabel property
             imageLabel->setProperty("imagePath", imagePath);
         }
-        ui->paintTableWidget->setCellWidget(row, 5, imageLabel);
+        ui->paintTableWidget->setCellWidget(row, 7, imageLabel);
 
         row++;
     }
@@ -172,17 +182,17 @@ void MainWindow::on_buttonDisplayShoppingList_clicked()
     ui->labelListTitle->setText("Viewing Shopping List");
 
     // SQL command to select items that are on the shopping list
-    QSqlQuery query("SELECT id, brand, color, type, item_number, image_path FROM paints WHERE shopping_list = 1");
+    QSqlQuery query("SELECT id, brand, color, item_number, type, collection, quantity, image_path FROM paints WHERE shopping_list = 1");
 
     // Display the list in the table
     // Set column count and headers for QTableWidget, this includes 1 column for the checkboxes
-    ui->paintTableWidget->setColumnCount(6);
+    ui->paintTableWidget->setColumnCount(8);
 
     // Set the titles of each column in the table
     QStringList headers;
 
     // The first header is blank for the checkbox
-    headers << "" << "Brand" << "Color" << "Type" << "Item Number" << "Image";
+    headers << "" << "Brand" << "Color" << "Item Number" << "Type" << "Collection" << "Quantity" << "Image";
     ui->paintTableWidget->setHorizontalHeaderLabels(headers);
 
     // Clear existing rows (refresh if there is a list is already displayed)
@@ -209,8 +219,10 @@ void MainWindow::on_buttonDisplayShoppingList_clicked()
         // Need to convert to string because 'query.value(column_name)' returns a 'QVariant' object that can hold any datatype
         ui->paintTableWidget->setItem(row, 1, new QTableWidgetItem(query.value("brand").toString()));
         ui->paintTableWidget->setItem(row, 2, new QTableWidgetItem(query.value("color").toString()));
-        ui->paintTableWidget->setItem(row, 3, new QTableWidgetItem(query.value("type").toString()));
-        ui->paintTableWidget->setItem(row, 4, new QTableWidgetItem(query.value("item_number").toString()));
+        ui->paintTableWidget->setItem(row, 3, new QTableWidgetItem(query.value("item_number").toString()));
+        ui->paintTableWidget->setItem(row, 4, new QTableWidgetItem(query.value("type").toString()));
+        ui->paintTableWidget->setItem(row, 5, new QTableWidgetItem(query.value("collection").toString()));
+        ui->paintTableWidget->setItem(row, 6, new QTableWidgetItem(query.value("quantity").toString()));
 
         // Display the image
         QString imagePath = query.value("image_path").toString();
@@ -225,7 +237,7 @@ void MainWindow::on_buttonDisplayShoppingList_clicked()
             // Store the image path in the QLabel property
             imageLabel->setProperty("imagePath", imagePath);
         }
-        ui->paintTableWidget->setCellWidget(row, 5, imageLabel);
+        ui->paintTableWidget->setCellWidget(row, 7, imageLabel);
 
         row++;
     }
@@ -294,14 +306,17 @@ void MainWindow::on_buttonEdit_clicked()
             // Retrieve the text from the cell at the specified row and column in the paintTableWidget and assign it to the corresponding variables brand, color, etc.
             QString brand = ui->paintTableWidget->item(row, 1)->text();
             QString color = ui->paintTableWidget->item(row, 2)->text();
-            QString type = ui->paintTableWidget->item(row, 3)->text();
-            QString itemNumber = ui->paintTableWidget->item(row, 4)->text();
+            QString itemNumber = ui->paintTableWidget->item(row, 3)->text();
+            QString type = ui->paintTableWidget->item(row, 4)->text();
+            QString collection = ui->paintTableWidget->item(row, 5)->text();
+            QString quantity = ui->paintTableWidget->item(row, 6)->text();
 
+            // Retrieve the image
             // Create a pointer that points to the widget containing the image
-            // 'cellWidget(row, 5)' retrieves the widget at the specified row and column (5) within the QTableWidget.
+            // 'cellWidget(row, 7)' retrieves the widget at the specified row and column (5) within the QTableWidget.
             // Use qobject_cast to cast the widget pointer to a QLabel pointer. ((ui->paintTableWidget->cellWidget(row, 5)) returns a pointer to a QWidget)
             // This allows us to access QLabel-specific methods and properties.
-            QLabel *imageLabel = qobject_cast<QLabel*>(ui->paintTableWidget->cellWidget(row, 5));
+            QLabel *imageLabel = qobject_cast<QLabel*>(ui->paintTableWidget->cellWidget(row, 7));
 
             // Display the image
             // 'imageLabel->property("imagePath")' gets the value of the 'imagePath' property from the imageLabel
@@ -313,7 +328,7 @@ void MainWindow::on_buttonEdit_clicked()
             // '(this)' sets the parent of the editDialog instance to the current instance of the MainWindow class.
             EditDialog editDialog(this);
             // Set the values of the editDialog instance with the current paint details
-            editDialog.setValues(brand, color, type, itemNumber, imagePath);
+            editDialog.setValues(brand, color, itemNumber, type, collection, quantity, imagePath);
 
             // 'editDialog.exec()' opens the dialog window and blocks input to other windows
             // 'QDialog::Accepted' and 'QDialog::Rejected' correspond to when the user clicks the built-in 'OK' or 'CANCEL' buttons in the window
@@ -321,20 +336,24 @@ void MainWindow::on_buttonEdit_clicked()
             if (editDialog.exec() == QDialog::Accepted) {
                 QString newBrand = editDialog.getBrand();
                 QString newColor = editDialog.getColor();
-                QString newType = editDialog.getType();
                 QString newItemNumber = editDialog.getItemNumber();
+                QString newType = editDialog.getType();
+                QString newCollection = editDialog.getCollection();
+                QString newQuantity = editDialog.getQuantity();
                 QString newImagePath = editDialog.getImagePath();
 
                 QSqlQuery query;
 
                 // Prepare the query, inserting the new records brand, color etc. with the values :brand, :type, etc.
-                query.prepare("UPDATE paints SET brand = :brand, color = :color, type = :type, item_number = :item_number, image_path = :image_path WHERE id = :id");
+                query.prepare("UPDATE paints SET brand = :brand, color = :color, item_number = :item_number, type = :type, collection = :collection, quantity = :quantity, image_path = :image_path WHERE id = :id");
 
                 // Bind the input variable values to the respective placeholders
                 query.bindValue(":brand", newBrand);
                 query.bindValue(":color", newColor);
-                query.bindValue(":type", newType);
                 query.bindValue(":item_number", newItemNumber);
+                query.bindValue(":type", newType);
+                query.bindValue(":collection", newCollection);
+                query.bindValue(":quantity", newQuantity);
                 query.bindValue(":image_path", newImagePath);
                 query.bindValue(":id", id);
                 if (!query.exec()) {
@@ -368,8 +387,8 @@ void MainWindow::on_buttonSearch_clicked()
 
     // Construct an SQL query string to search for paints matching the search term in any of the columns: brand, color, type, or item_number.
     // The search term is inserted into the query using QString's arg() method, which safely replaces '%1' with the actual search term.
-    QString searchQuery = QString("SELECT id, brand, color, type, item_number, image_path FROM paints WHERE "
-                                  "brand LIKE '%%1%' OR color LIKE '%%1%' OR type LIKE '%%1%' OR item_number LIKE '%%1%'")
+    QString searchQuery = QString("SELECT id, brand, color, item_number, type, collection, quantity, image_path FROM paints WHERE "
+                                  "brand LIKE '%%1%' OR color LIKE '%%1%' OR item_number LIKE '%%1%' OR type LIKE '%%1%' OR collection LIKE '%%1%' OR quantity LIKE '%%1%'")
                               .arg(searchTerm);
 
     if (!query.exec(searchQuery)) {
@@ -380,11 +399,11 @@ void MainWindow::on_buttonSearch_clicked()
 
     // Display the list in the table
     // Set column count and headers for QTableWidget, this includes 1 column for the checkboxes
-    ui->paintTableWidget->setColumnCount(6);
+    ui->paintTableWidget->setColumnCount(8);
 
     // Set the titles of each column in the table
     QStringList headers;
-    headers << "Select" << "Brand" << "Color" << "Type" << "Item Number" << "Image";
+    headers << "Select" << "Brand" << "Color" << "Item Number" << "Type" << "Collection" << "Quantity" << "Image";
     ui->paintTableWidget->setHorizontalHeaderLabels(headers);
 
     // Clear existing rows (refresh if there is a list is already displayed)
@@ -411,8 +430,11 @@ void MainWindow::on_buttonSearch_clicked()
         // Need to convert to string because query.value(column_name) returns a 'QVariant' object that can hold any datatype
         ui->paintTableWidget->setItem(row, 1, new QTableWidgetItem(query.value("brand").toString()));
         ui->paintTableWidget->setItem(row, 2, new QTableWidgetItem(query.value("color").toString()));
-        ui->paintTableWidget->setItem(row, 3, new QTableWidgetItem(query.value("type").toString()));
-        ui->paintTableWidget->setItem(row, 4, new QTableWidgetItem(query.value("item_number").toString()));
+        ui->paintTableWidget->setItem(row, 3, new QTableWidgetItem(query.value("item_number").toString()));
+        ui->paintTableWidget->setItem(row, 4, new QTableWidgetItem(query.value("type").toString()));
+        ui->paintTableWidget->setItem(row, 5, new QTableWidgetItem(query.value("collection").toString()));
+        ui->paintTableWidget->setItem(row, 6, new QTableWidgetItem(query.value("quantity").toString()));
+
 
         // Display the image
         QString imagePath = query.value("image_path").toString();
@@ -427,7 +449,7 @@ void MainWindow::on_buttonSearch_clicked()
             // Store the image path in the QLabel property
             imageLabel->setProperty("imagePath", imagePath);
         }
-        ui->paintTableWidget->setCellWidget(row, 5, imageLabel);
+        ui->paintTableWidget->setCellWidget(row, 7, imageLabel);
 
         row++;
     }

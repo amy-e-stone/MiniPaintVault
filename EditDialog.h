@@ -17,11 +17,13 @@ public:
 
     // Added member function declarations
     // The & operator is used to get the address of a variable, which is what we store in a pointer.
-    void setValues(const QString &brand, const QString &color, const QString &type, const QString &itemNumber, const QString &imagePath);
+    void setValues(const QString &brand, const QString &color, const QString &itemNumber, const QString &type, const QString &collection, const QString &quantity, const QString &imagePath);
     QString getBrand() const;
     QString getColor() const;
-    QString getType() const;
     QString getItemNumber() const;
+    QString getType() const;
+    QString getCollection() const;
+    QString getQuantity() const;
     QString getImagePath() const;
 
 private slots:
