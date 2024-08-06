@@ -42,6 +42,14 @@ private slots:
 
     void on_buttonUploadImage_clicked();
 
+    void on_buttonImportCSV_clicked();
+
+    void on_buttonHelp_clicked();
+
+    void on_buttonSelectAll_clicked();
+
+    void on_buttonDeselectAll_clicked();
+
 private:
     Ui::MainWindow *ui;
     // Create SQLite database object named 'db'

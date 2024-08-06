@@ -3,6 +3,9 @@
 #include <QSqlQuery> //  Allows executing SQL queries in Qt. (SQLite)
 #include <QSqlError> // Handles errors that occur during SQL operations.
 #include <QFileDialog> // To upload images
+#include <QFile> // For file handling
+#include <QTextStream> // For text I/O
+#include <QMessageBox> // For Help window
 #include <QDebug> //  Provides debugging information.
 
 
@@ -169,17 +172,6 @@ void MainWindow::on_buttonDisplayPaints_clicked()
         // Display the image
         QString imagePath = query.value("image_path").toString();
 
-        // DEBUG
-        qDebug() << "Retrieved paint:"
-                 << query.value("brand").toString() << ", "
-                 << query.value("color").toString() << ", "
-                 << query.value("item_number").toString() << ", "
-                 << query.value("type").toString() << ", "
-                 << query.value("collection").toString() << ", "
-                 << query.value("quantity").toString() << ", "
-                 << imagePath; // Debug statement
-        // END DEBUG
-
         // Qlabel is a Qt class that displays an image or text
         // Create a pointer 'imageLabel', which points to a new instance of QLabel.
         QLabel *imageLabel = new QLabel();
@@ -328,12 +320,35 @@ void MainWindow::on_buttonDelete_clicked()
 
 void MainWindow::on_buttonEdit_clicked()
 {
+    int selectedCount = 0;
+
     for (int row = 0; row < ui->paintTableWidget->rowCount(); ++row) {
         QTableWidgetItem *checkboxItem = ui->paintTableWidget->item(row, 0);
 
         // If the item's checkbox is selected
         if (checkboxItem->checkState() == Qt::Checked) {
+            selectedCount++;
 
+            // If more than one item is selected, show an error message and return
+            if (selectedCount > 1) {
+                QMessageBox::warning(this, "Error", "Please select only one item to edit.");
+                return;
+            }
+        }
+    }
+
+    // If no item is selected, show an error message
+    if (selectedCount == 0) {
+        QMessageBox::warning(this, "Error", "Please select one item to edit.");
+        return;
+    }
+
+    // Proceed to open the dialog for the selected item
+    for (int row = 0; row < ui->paintTableWidget->rowCount(); ++row) {
+        QTableWidgetItem *checkboxItem = ui->paintTableWidget->item(row, 0);
+
+        // If the item's checkbox is selected
+        if (checkboxItem->checkState() == Qt::Checked){
             // Assigns the value of the "id" field from the database query to the checkbox item using 'Qt::UserRole' (user defined data)
             // This allows the checkbox item to store the database ID for later use such as editing or deleting
             // Need to convert to int because checkboxItem->data(Qt::UserRole) returns a 'QVariant' object that can hold any datatype
@@ -359,9 +374,6 @@ void MainWindow::on_buttonEdit_clicked()
             // Need to convert to string because 'imageLabel->property("imagePath").toString()' returns a 'QVariant' object that can hold any datatype
             QString imagePath = imageLabel->property("imagePath").toString();
 
-            // DEBUG
-            qDebug() << "Image path before edit: " << imagePath; // Debug statement
-
             // Open the edit dialog window with current values
             // Create an instance of the EditDialog window object
             // '(this)' sets the parent of the editDialog instance to the current instance of the MainWindow class.
@@ -380,9 +392,6 @@ void MainWindow::on_buttonEdit_clicked()
                 QString newCollection = editDialog.getCollection();
                 QString newQuantity = editDialog.getQuantity();
                 QString newImagePath = editDialog.getImagePath();
-
-                // DEBUG
-                qDebug() << "Image path before update query: " << newImagePath; // Debug statement
 
                 QSqlQuery query;
 
@@ -405,6 +414,9 @@ void MainWindow::on_buttonEdit_clicked()
                     /*qDebug() << "Successfully updated item with id " << id;*/
                 }
             }
+
+            // Since we are only editing the first selected item, break the loop
+            break;
         }
     }
     // Refresh the table display
@@ -598,3 +610,109 @@ void MainWindow::on_buttonUploadImage_clicked()
     }
 }
 
+
+void MainWindow::on_buttonImportCSV_clicked()
+{
+    // Open a file dialog to let the user choose a file
+    QString fileName = QFileDialog::getOpenFileName(this, "Open CSV File", "", "CSV Files (*.csv)");
+    if (fileName.isEmpty())
+        return;
+
+    // Open the selected file for reading
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Error opening file: " << file.errorString();
+        return;
+    }
+
+    QTextStream inStream(&file);
+
+    // Read and split the header line into a list of strings
+    QStringList headers = inStream.readLine().split(',');
+
+    // Validate the headers
+    if (headers.size() != 7 || headers[0] != "brand" || headers[1] != "color" ||
+        headers[2] != "item_number" || headers[3] != "type" || headers[4] != "collection" ||
+        headers[5] != "quantity" || headers[6] != "image_path") {
+        qDebug() << "Invalid CSV format";
+        file.close();
+        return;
+    }
+
+    // Assuming the CSV has columns: brand, color, item_number, type, collection, quantity, image_path
+    while (!inStream.atEnd()) {
+        QStringList fields = inStream.readLine().split(',');
+
+        // Make sure there are enough fields, there should be 7 fields per line
+        if (fields.size() == 7) {
+            QString brand = fields[0];
+            QString color = fields[1];
+            QString itemNumber = fields[2];
+            QString type = fields[3];
+            QString collection = fields[4];
+            QString quantity = fields[5];
+            QString imagePath = fields[6];
+
+            // Insert the data into the database
+            QSqlQuery query;
+            query.prepare("INSERT INTO paints (brand, color, item_number, type, collection, quantity, image_path) "
+                          "VALUES (:brand, :color, :item_number, :type, :collection, :quantity, :image_path)");
+            query.bindValue(":brand", brand);
+            query.bindValue(":color", color);
+            query.bindValue(":item_number", itemNumber);
+            query.bindValue(":type", type);
+            query.bindValue(":collection", collection);
+            query.bindValue(":quantity", quantity);
+            query.bindValue(":image_path", imagePath);
+
+            if (!query.exec()) {
+                qDebug() << "Error inserting data: " << query.lastError();
+            }
+        }
+    }
+
+    file.close();
+    on_buttonDisplayPaints_clicked(); // Refresh the table to show the newly imported data
+
+}
+
+
+void MainWindow::on_buttonHelp_clicked()
+{
+    QString helpText = "To import a CSV file, please ensure it is formatted as follows:\n"
+                       "- The first row must contain the headers: brand, color, item_number, type, collection, quantity, image_path.\n"
+                       "- Each subsequent row should contain the data for one paint entry.\n"
+                       "- Example:\n"
+                       "\n"
+                       "brand,color,item_number,type,collection,quantity,image_path\n"
+                       "Reaper,Red Brick,9001,Non-Metallic,MSP Core Colors,1,/path/to/image.png\n"
+                       "Vallejo,Grey,325438515,Primer,Prep Paints,2,/path/to/image.png\n"
+                       "\n"
+                       "- Ensure all image paths are correct and accessible.\n";
+
+    QMessageBox::information(this, "CSV Import Instructions", helpText);
+}
+
+
+void MainWindow::on_buttonSelectAll_clicked()
+{
+    // Set all checkboxes as checked
+    for (int row = 0; row < ui->paintTableWidget->rowCount(); ++row) {
+        QTableWidgetItem *checkboxItem = ui->paintTableWidget->item(row, 0);
+        if (checkboxItem) {
+            checkboxItem->setCheckState(Qt::Checked);
+        }
+    }
+}
+
+
+void MainWindow::on_buttonDeselectAll_clicked()
+{
+    // Set all checkboxes as unchecked
+    for (int row = 0; row < ui->paintTableWidget->rowCount(); ++row) {
+        QTableWidgetItem *checkboxItem = ui->paintTableWidget->item(row, 0);
+        if (checkboxItem) {
+            checkboxItem->setCheckState(Qt::Unchecked);
+        }
+    }
+}

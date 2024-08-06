@@ -212,14 +212,14 @@ QPushButton {
      <widget class="QPushButton" name="buttonUploadImage">
       <property name="minimumSize">
        <size>
-        <width>111</width>
-        <height>30</height>
+        <width>115</width>
+        <height>34</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>111</width>
-        <height>30</height>
+        <width>115</width>
+        <height>34</height>
        </size>
       </property>
       <property name="text">
@@ -231,14 +231,14 @@ QPushButton {
      <widget class="QPushButton" name="buttonDeleteImage">
       <property name="minimumSize">
        <size>
-        <width>111</width>
-        <height>30</height>
+        <width>115</width>
+        <height>34</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>111</width>
-        <height>30</height>
+        <width>115</width>
+        <height>34</height>
        </size>
       </property>
       <property name="text">

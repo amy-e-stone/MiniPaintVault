@@ -287,7 +287,7 @@ QPushButton {
        <widget class="QPushButton" name="buttonDelete">
         <property name="geometry">
          <rect>
-          <x>140</x>
+          <x>260</x>
           <y>780</y>
           <width>111</width>
           <height>30</height>
@@ -362,7 +362,7 @@ QPushButton {
        <widget class="QPushButton" name="buttonEdit">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>140</x>
           <y>780</y>
           <width>111</width>
           <height>30</height>
@@ -410,22 +410,22 @@ QPushButton {
        <widget class="QPushButton" name="buttonAddToShopping">
         <property name="geometry">
          <rect>
-          <x>290</x>
+          <x>380</x>
           <y>780</y>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -443,22 +443,22 @@ QPushButton {
        <widget class="QPushButton" name="buttonDisplayShoppingList">
         <property name="geometry">
          <rect>
-          <x>290</x>
+          <x>380</x>
           <y>820</y>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -476,22 +476,22 @@ QPushButton {
        <widget class="QPushButton" name="buttonRemoveFromShoppingList">
         <property name="geometry">
          <rect>
-          <x>290</x>
+          <x>380</x>
           <y>860</y>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>184</width>
-          <height>30</height>
+          <height>34</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -621,6 +621,112 @@ QPushButton {
         </property>
         <property name="text">
          <string>Add Paint</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonImportCSV">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>410</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Import CSV</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonHelp">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>410</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>CSV Format Help</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonSelectAll">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>780</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Select All</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonDeselectAll">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>820</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Deselect All</string>
         </property>
        </widget>
       </widget>
