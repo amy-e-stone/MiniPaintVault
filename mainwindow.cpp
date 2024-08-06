@@ -677,6 +677,46 @@ void MainWindow::on_buttonImportCSV_clicked()
 }
 
 
+void MainWindow::on_buttonExportCSV_clicked()
+{
+    // Open a file dialog to let the user choose a file location and name
+    QString fileName = QFileDialog::getSaveFileName(this, "Save CSV File", "", "CSV Files (*.csv)");
+    if (fileName.isEmpty())
+        return;
+
+    // Open the selected file for writing
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Error opening file for writing: " << file.errorString();
+        return;
+    }
+
+    QTextStream outStream(&file);
+
+    // Write the header line
+    outStream << "brand,color,item_number,type,collection,quantity,image_path\n";
+
+    // Query the database for all paints
+    QSqlQuery query("SELECT brand, color, item_number, type, collection, quantity, image_path FROM paints");
+
+    while (query.next()) {
+        QString brand = query.value("brand").toString();
+        QString color = query.value("color").toString();
+        QString itemNumber = query.value("item_number").toString();
+        QString type = query.value("type").toString();
+        QString collection = query.value("collection").toString();
+        QString quantity = query.value("quantity").toString();
+        QString imagePath = query.value("image_path").toString();
+
+        // Write the data to the file
+        outStream << brand << "," << color << "," << itemNumber << "," << type << "," << collection << "," << quantity << "," << imagePath << "\n";
+    }
+
+    file.close();
+    qDebug() << "Data exported successfully to " << fileName;
+}
+
+
 void MainWindow::on_buttonHelp_clicked()
 {
     QString helpText = "To import a CSV file, please ensure it is formatted as follows:\n"

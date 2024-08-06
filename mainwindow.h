@@ -44,6 +44,8 @@ private slots:
 
     void on_buttonImportCSV_clicked();
 
+    void on_buttonExportCSV_clicked();
+
     void on_buttonHelp_clicked();
 
     void on_buttonSelectAll_clicked();
