@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>671</width>
+    <width>510</width>
     <height>489</height>
    </rect>
   </property>
@@ -37,7 +37,7 @@ QPushButton {
    </property>
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>150</x>
      <y>430</y>
      <width>341</width>
      <height>51</height>
@@ -264,7 +264,7 @@ QPushButton {
   <widget class="QLabel" name="labelImage">
    <property name="geometry">
     <rect>
-     <x>500</x>
+     <x>410</x>
      <y>180</y>
      <width>39</width>
      <height>24</height>

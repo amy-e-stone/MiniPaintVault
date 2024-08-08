@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons"/>
+    <qresource prefix="/">
+        <file>icons/dragon.png</file>
+        <file>icons/treasure-chest.png</file>
+        <file>icons/wizard.png</file>
+    </qresource>
+</RCC>

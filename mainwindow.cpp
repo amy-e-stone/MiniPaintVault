@@ -7,6 +7,7 @@
 #include <QTextStream> // For text I/O
 #include <QMessageBox> // For Help window
 #include <QDebug> //  Provides debugging information.
+#include <QIcon>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,8 +16,25 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Set the window icon (the title was set using Qt Design Mode)
+    //setWindowIcon(QIcon(":/icons/dragon.png"));
+    //setWindowIcon(QIcon(":/icons/treasure-chest.png"));
+    setWindowIcon(QIcon(":/icons/wizard.png"));
+
     // Enable sorting for the table widget
     ui->paintTableWidget->setSortingEnabled(true);
+
+    // Ensure the main menu buttons are children of the main window, so it is not part of it's corresponding group box
+    ui->buttonMainAddPaint->setParent(this);
+    ui->buttonMainManagePaints->setParent(this);
+
+    // Position main menu buttons over the group boxes
+    ui->buttonMainAddPaint->move(200, 100);
+    ui->buttonMainManagePaints->move(200, 150);
+
+    // Hide the group boxes by default
+    ui->groupBoxAddPaint->hide();
+    ui->groupBoxManagePaints->hide();
 
     // Initialize the database (pass 'db' through the function)
     initializeDatabase();
@@ -40,7 +58,7 @@ void MainWindow::initializeDatabase()
 
     // Open database
     if (!db.open()) {
-         // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
+        // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
         qDebug() << "Error: Unable to connect to database!" << db.lastError();
     } else {
         qDebug() << "Database connected successfully!";
@@ -63,7 +81,7 @@ void MainWindow::initializeDatabase()
 
     // 'query.exec()' executes insert query that was prepared above
     if (!query.exec(createTableQuery)) {
-         // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
+        // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
         qDebug() << "Error creating table: " << query.lastError();
     }
 }
@@ -71,14 +89,21 @@ void MainWindow::initializeDatabase()
 
 void MainWindow::on_buttonAddPaint_clicked()
 {
+
     // Retrieve the text entered by the user in the input fields named inputBrand, inputColor, etc., and storing that text in the QString variable named brand, color, etc.
-    QString brand = ui->inputBrand->text();
-    QString color = ui->inputColor->text();
-    QString itemNumber = ui->inputItemNum->text();
-    QString type = ui->inputType->text();
-    QString collection = ui->inputCollection->text();
-    QString quantity = ui->inputQuantity->text();
+    QString brand = ui->inputBrand->text().trimmed();
+    QString color = ui->inputColor->text().trimmed();
+    QString itemNumber = ui->inputItemNum->text().trimmed();
+    QString type = ui->inputType->text().trimmed();
+    QString collection = ui->inputCollection->text().trimmed();
+    QString quantity = ui->inputQuantity->text().trimmed();
     QString imagePath = selectedImagePath;
+
+    // Check if all fields are empty
+    if (brand.isEmpty() && color.isEmpty() && itemNumber.isEmpty() && type.isEmpty() && collection.isEmpty() && quantity.isEmpty() && imagePath.isEmpty()) {
+        QMessageBox::warning(this, "Error", "At least one field should have a value.");
+        return;
+    }
 
     // Create query object which allows the execution of SQL commands (e.g., SELECT, INSERT, UPDATE, DELETE) on the connected database.
     QSqlQuery query;
@@ -97,7 +122,7 @@ void MainWindow::on_buttonAddPaint_clicked()
 
     // 'query.exec()' executes insert query that was prepared above
     if (!query.exec()) {
-         // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
+        // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
         qDebug() << "Error inserting data: " << query.lastError();
     } else {
         // Display the added items to the list of added paints
@@ -291,28 +316,34 @@ void MainWindow::on_buttonClearDisplayList_clicked()
 // Delete an item from inventory
 void MainWindow::on_buttonDelete_clicked()
 {
-    QSqlQuery query;
-    for (int row = 0; row < ui->paintTableWidget->rowCount(); ++row) {
-        QTableWidgetItem *checkboxItem = ui->paintTableWidget->item(row, 0);
+    // Check to see if the user wants to delete the entry
+    if (QMessageBox::question(this, "Confirm Delete", "Are you sure you want to delete the selected items?",
+                              QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok) {
 
-        // If the item's checkbox is selected
-        if (checkboxItem->checkState() == Qt::Checked) {
+        QSqlQuery query;
+        for (int row = 0; row < ui->paintTableWidget->rowCount(); ++row) {
+            QTableWidgetItem *checkboxItem = ui->paintTableWidget->item(row, 0);
 
-            // Assigns the value of the "id" field from the database query to the checkbox item using 'Qt::UserRole' (user defined data)
-            // This allows the checkbox item to store the database ID for later use such as editing or deleting
-            // Need to convert to int because checkboxItem->data(Qt::UserRole) returns a 'QVariant' object that can hold any datatype
-            int id = checkboxItem->data(Qt::UserRole).toInt();
+            // If the item's checkbox is selected
+            if (checkboxItem->checkState() == Qt::Checked) {
 
-            // Prepare the query by assigning the variable 'id' to the placeholder ':id'
-            query.prepare("DELETE FROM paints WHERE id = :id");
-            // the prepared query will use the value of 'id' to find and delete the specific row in the paints table where the id column matches this value.
-            query.bindValue(":id", id);
-            if (!query.exec()) {
-                 // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
-                qDebug() << "Error deleting item with id " << id << ":" << query.lastError();
+                // Assigns the value of the "id" field from the database query to the checkbox item using 'Qt::UserRole' (user defined data)
+                // This allows the checkbox item to store the database ID for later use such as editing or deleting
+                // Need to convert to int because checkboxItem->data(Qt::UserRole) returns a 'QVariant' object that can hold any datatype
+                int id = checkboxItem->data(Qt::UserRole).toInt();
+
+                // Prepare the query by assigning the variable 'id' to the placeholder ':id'
+                query.prepare("DELETE FROM paints WHERE id = :id");
+                // the prepared query will use the value of 'id' to find and delete the specific row in the paints table where the id column matches this value.
+                query.bindValue(":id", id);
+                if (!query.exec()) {
+                    // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
+                    qDebug() << "Error deleting item with id " << id << ":" << query.lastError();
+                }
             }
         }
     }
+
     // Refresh the table display
     on_buttonDisplayPaints_clicked();
 }
@@ -433,7 +464,7 @@ void MainWindow::on_buttonSearch_clicked()
     ui->labelListTitle->setText("Viewing Search Results");
 
     // Get the search term from the input field
-    QString searchTerm = ui->inputSearch->text();
+    QString searchTerm = ui->inputSearch->text().trimmed();
 
     // If the search term is empty, do nothing
     if (searchTerm.isEmpty()) {
@@ -668,6 +699,9 @@ void MainWindow::on_buttonImportCSV_clicked()
             if (!query.exec()) {
                 qDebug() << "Error inserting data: " << query.lastError();
             }
+
+            // Display the added items to the list of added paints
+            ui->paintListWidget->addItem("Brand: " + brand + ", Color: " + color + ", Item Number: " + itemNumber + ", Type: " + type + ", Collection: " + collection + ", Quantity: " + quantity);
         }
     }
 
@@ -755,4 +789,40 @@ void MainWindow::on_buttonDeselectAll_clicked()
             checkboxItem->setCheckState(Qt::Unchecked);
         }
     }
+}
+
+
+// Add Paints main menu
+void MainWindow::on_buttonMainAddPaint_clicked()
+{
+    ui->groupBoxAddPaint->show();
+    ui->buttonMainAddPaint->hide();
+    ui->buttonMainManagePaints->hide();
+    // Hide all other buttons as added ...
+}
+
+void MainWindow::on_buttonDoneAddPaint_clicked()
+{
+    ui->groupBoxAddPaint->hide();
+    ui->buttonMainAddPaint->show();
+    ui->buttonMainManagePaints->show();
+    // Show all other buttons as added ...
+}
+
+
+// Manage Paints main menu
+void MainWindow::on_buttonMainManagePaints_clicked()
+{
+    ui->groupBoxManagePaints->show();
+    ui->buttonMainManagePaints->hide();
+    ui->buttonMainAddPaint->hide();
+    // Hide all other buttons as added ...
+}
+
+void MainWindow::on_buttonDoneManagePaints_clicked()
+{
+    ui->groupBoxManagePaints->hide();
+    ui->buttonMainManagePaints->show();
+    ui->buttonMainAddPaint->show();
+    // Show all other buttons as added ...
 }

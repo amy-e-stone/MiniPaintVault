@@ -52,6 +52,14 @@ private slots:
 
     void on_buttonDeselectAll_clicked();
 
+    void on_buttonMainAddPaint_clicked();
+
+    void on_buttonDoneAddPaint_clicked();
+
+    void on_buttonMainManagePaints_clicked();
+
+    void on_buttonDoneManagePaints_clicked();
+
 private:
     Ui::MainWindow *ui;
     // Create SQLite database object named 'db'
