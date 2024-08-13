@@ -33,13 +33,10 @@ MainWindow::MainWindow(QWidget *parent)
     // Enable sorting for the table widget
     ui->paintTableWidget->setSortingEnabled(true);
 
-    // Ensure the main menu buttons are children of the main window, so it is not part of it's corresponding group box
+    // Ensure the main menu buttons and wizard image are children of the main window, so it is not part of it's corresponding group box
     ui->buttonMainAddPaint->setParent(this);
     ui->buttonMainManagePaints->setParent(this);
-
-    // Position main menu buttons over the group boxes
-    ui->buttonMainAddPaint->move(400, 100);
-    ui->buttonMainManagePaints->move(400, 150);
+    ui->labelWizardImage->setParent(this);
 
     // Hide the group boxes by default
     ui->groupBoxAddPaint->hide();
@@ -776,6 +773,46 @@ void MainWindow::on_buttonExportCSV_clicked()
 }
 
 
+void MainWindow::on_buttonExportShoppingList_clicked()
+{
+    // Open a file dialog to let the user choose a file location and name
+    QString fileName = QFileDialog::getSaveFileName(this, "Save CSV File", "", "CSV Files (*.csv)");
+    if (fileName.isEmpty())
+        return;
+
+    // Open the selected file for writing
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Error opening file for writing: " << file.errorString();
+        return;
+    }
+
+    QTextStream outStream(&file);
+
+    // Write the header line
+    outStream << "brand,color,item_number,type,collection,quantity,image_path\n";
+
+    // Query the database for only those paints that are on the shopping list
+    QSqlQuery query("SELECT brand, color, item_number, type, collection, quantity, image_path FROM paints WHERE shopping_list = 1");
+
+    while (query.next()) {
+        QString brand = query.value("brand").toString();
+        QString color = query.value("color").toString();
+        QString itemNumber = query.value("item_number").toString();
+        QString type = query.value("type").toString();
+        QString collection = query.value("collection").toString();
+        QString quantity = query.value("quantity").toString();
+        QString imagePath = query.value("image_path").toString();
+
+        // Write the data to the file
+        outStream << brand << "," << color << "," << itemNumber << "," << type << "," << collection << "," << quantity << "," << imagePath << "\n";
+    }
+
+    file.close();
+    qDebug() << "Data exported successfully to " << fileName;
+}
+
+
 void MainWindow::on_buttonHelp_clicked()
 {
     QString helpText = "To import a CSV file, please ensure it is formatted as follows:\n"
@@ -823,16 +860,20 @@ void MainWindow::on_buttonMainAddPaint_clicked()
     ui->groupBoxAddPaint->show();
     ui->buttonMainAddPaint->hide();
     ui->buttonMainManagePaints->hide();
+    ui->labelWizardImage->hide();
     // Hide all other buttons as added ...
 }
+
 
 void MainWindow::on_buttonDoneAddPaint_clicked()
 {
     ui->groupBoxAddPaint->hide();
     ui->buttonMainAddPaint->show();
     ui->buttonMainManagePaints->show();
+    ui->labelWizardImage->show();
     // Show all other buttons as added ...
 }
+
 
 // Manage Paints main menu
 void MainWindow::on_buttonMainManagePaints_clicked()
@@ -840,13 +881,19 @@ void MainWindow::on_buttonMainManagePaints_clicked()
     ui->groupBoxManagePaints->show();
     ui->buttonMainManagePaints->hide();
     ui->buttonMainAddPaint->hide();
+    ui->labelWizardImage->hide();
     // Hide all other buttons as added ...
 }
+
 
 void MainWindow::on_buttonDoneManagePaints_clicked()
 {
     ui->groupBoxManagePaints->hide();
     ui->buttonMainManagePaints->show();
     ui->buttonMainAddPaint->show();
+    ui->labelWizardImage->show();
     // Show all other buttons as added ...
 }
+
+
+

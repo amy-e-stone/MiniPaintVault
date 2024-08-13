@@ -60,6 +60,8 @@ private slots:
 
     void on_buttonDoneManagePaints_clicked();
 
+    void on_buttonExportShoppingList_clicked();
+
 private:
     Ui::MainWindow *ui;
     // Create SQLite database object named 'db'
