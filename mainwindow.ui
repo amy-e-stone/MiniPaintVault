@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>533</width>
-    <height>702</height>
+    <width>948</width>
+    <height>748</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,427 +32,100 @@ QPushButton {
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="1">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
+    <item row="1" column="1">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
       </property>
-      <widget class="QWidget" name="paintsTab">
-       <attribute name="title">
-        <string>Paints</string>
-       </attribute>
-       <widget class="QGroupBox" name="groupBoxAddPaint">
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="buttonMainManagePaints">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>670</y>
+         <width>111</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Manage Paints</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="buttonMainAddPaint">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>670</y>
+         <width>111</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Add Paint</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBoxAddPaint">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>891</width>
+         <height>641</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Add Paint</string>
+       </property>
+       <widget class="QGroupBox" name="groupBoxImportExport">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>491</width>
-          <height>641</height>
+          <x>340</x>
+          <y>220</y>
+          <width>131</width>
+          <height>161</height>
          </rect>
         </property>
         <property name="title">
-         <string>Add Paint</string>
+         <string>Import/Export CSV</string>
         </property>
-        <widget class="QGroupBox" name="groupBoxImportExport">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>220</y>
-           <width>131</width>
-           <height>161</height>
-          </rect>
-         </property>
-         <property name="title">
-          <string>Import/Export CSV</string>
-         </property>
-         <widget class="QWidget" name="verticalLayoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>19</y>
-            <width>113</width>
-            <height>131</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayoutImportExport">
-           <item>
-            <widget class="QPushButton" name="buttonImportCSV">
-             <property name="minimumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>Import CSV</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="buttonExportCSV">
-             <property name="minimumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>Export CSV</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="buttonHelp">
-             <property name="minimumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>CSV Format Help</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-        <widget class="QGroupBox" name="groupBoxUploadedImage">
-         <property name="geometry">
-          <rect>
-           <x>290</x>
-           <y>20</y>
-           <width>178</width>
-           <height>185</height>
-          </rect>
-         </property>
-         <property name="title">
-          <string>Last Uploaded Image</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QLabel" name="labelImage">
-            <property name="minimumSize">
-             <size>
-              <width>158</width>
-              <height>149</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>158</width>
-              <height>149</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QGroupBox" name="groupBoxRecentlyAdded">
+        <widget class="QWidget" name="verticalLayoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>400</y>
-           <width>471</width>
-           <height>191</height>
-          </rect>
-         </property>
-         <property name="title">
-          <string>Recently Added</string>
-         </property>
-         <widget class="QWidget" name="verticalLayoutWidget_2">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>20</y>
-            <width>451</width>
-            <height>161</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayoutRecentlyAdded">
-           <item>
-            <widget class="QListWidget" name="paintListWidget"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="buttonClearAddedList">
-             <property name="minimumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>111</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Clear</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="verticalLayoutWidget_3">
-         <property name="geometry">
-          <rect>
-           <x>370</x>
-           <y>590</y>
+           <y>19</y>
            <width>113</width>
-           <height>41</height>
+           <height>131</height>
           </rect>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayoutDoneAdding">
+         <layout class="QVBoxLayout" name="verticalLayoutImportExport">
           <item>
-           <widget class="QPushButton" name="buttonDoneAddPaint">
-            <property name="minimumSize">
-             <size>
-              <width>111</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>111</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Done</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="formLayoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>30</y>
-           <width>261</width>
-           <height>351</height>
-          </rect>
-         </property>
-         <layout class="QFormLayout" name="formLayoutAddPaint">
-          <property name="horizontalSpacing">
-           <number>10</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>10</number>
-          </property>
-          <property name="leftMargin">
-           <number>5</number>
-          </property>
-          <property name="topMargin">
-           <number>5</number>
-          </property>
-          <property name="rightMargin">
-           <number>5</number>
-          </property>
-          <property name="bottomMargin">
-           <number>5</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="labelBrand">
-            <property name="text">
-             <string>Brand:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="inputBrand">
-            <property name="minimumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="labelColor">
-            <property name="text">
-             <string>Color:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="inputColor">
-            <property name="minimumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelItemNum">
-            <property name="text">
-             <string>Item #:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="inputItemNum">
-            <property name="minimumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="labelType">
-            <property name="text">
-             <string>Type:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="inputType">
-            <property name="minimumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="labelCollection">
-            <property name="text">
-             <string>Collection:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="inputCollection">
-            <property name="minimumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>181</width>
-              <height>31</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="labelQuantity">
-            <property name="text">
-             <string>Quantity:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="inputQuantity">
-            <property name="minimumSize">
-             <size>
-              <width>31</width>
-              <height>31</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>31</width>
-              <height>31</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="labelImageText">
-            <property name="text">
-             <string>Image:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QPushButton" name="buttonUploadImage">
-            <property name="minimumSize">
-             <size>
-              <width>111</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>111</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Upload</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1">
-           <widget class="QPushButton" name="buttonAddPaint">
+           <widget class="QPushButton" name="buttonImportCSV">
             <property name="minimumSize">
              <size>
               <width>111</width>
@@ -469,62 +142,106 @@ QPushButton {
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>Add Paint</string>
+             <string>Import CSV</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buttonExportCSV">
+            <property name="minimumSize">
+             <size>
+              <width>111</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>111</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Export CSV</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buttonHelp">
+            <property name="minimumSize">
+             <size>
+              <width>111</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>111</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>CSV Format Help</string>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
        </widget>
-       <widget class="QPushButton" name="buttonMainAddPaint">
+       <widget class="QGroupBox" name="groupBoxUploadedImage">
         <property name="geometry">
          <rect>
-          <x>380</x>
-          <y>650</y>
-          <width>111</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Add Paint</string>
-        </property>
-       </widget>
-       <widget class="QGroupBox" name="groupBoxManagePaints">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>491</width>
-          <height>641</height>
+          <x>290</x>
+          <y>20</y>
+          <width>178</width>
+          <height>185</height>
          </rect>
         </property>
         <property name="title">
-         <string>Manage Paints</string>
+         <string>Last Uploaded Image</string>
         </property>
-        <widget class="QWidget" name="verticalLayoutWidget_4">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="labelImage">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QGroupBox" name="groupBoxRecentlyAdded">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>400</y>
+          <width>681</width>
+          <height>191</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Recently Added</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_2">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>590</y>
-           <width>113</width>
-           <height>41</height>
+           <x>10</x>
+           <y>20</y>
+           <width>661</width>
+           <height>161</height>
           </rect>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayoutDoneManaging">
+         <layout class="QVBoxLayout" name="verticalLayoutRecentlyAdded">
           <item>
-           <widget class="QPushButton" name="buttonDoneManagePaints">
+           <widget class="QListWidget" name="paintListWidget"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buttonClearAddedList">
             <property name="minimumSize">
              <size>
               <width>111</width>
@@ -538,362 +255,482 @@ QPushButton {
              </size>
             </property>
             <property name="text">
-             <string>Done</string>
+             <string>Clear</string>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QTableWidget" name="paintTableWidget">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>120</y>
-           <width>461</width>
-           <height>281</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>461</width>
-           <height>281</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>461</width>
-           <height>281</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelSearch">
-         <property name="geometry">
-          <rect>
-           <x>170</x>
-           <y>20</y>
-           <width>91</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Search Inventory</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonSearch">
-         <property name="geometry">
-          <rect>
-           <x>330</x>
-           <y>40</y>
-           <width>111</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Search</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="inputSearch">
-         <property name="geometry">
-          <rect>
-           <x>170</x>
-           <y>40</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>151</width>
-           <height>31</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>151</width>
-           <height>31</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonDisplayPaints">
-         <property name="geometry">
-          <rect>
-           <x>30</x>
-           <y>40</y>
-           <width>111</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Display All</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonDeselectAll">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>450</y>
-           <width>111</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Deselect All</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonSelectAll">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>410</y>
-           <width>111</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Select All</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonEdit">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>410</y>
-           <width>111</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonDelete">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>450</y>
-           <width>111</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Delete</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonRemoveFromShoppingList">
-         <property name="geometry">
-          <rect>
-           <x>290</x>
-           <y>490</y>
-           <width>184</width>
-           <height>34</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>184</width>
-           <height>34</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>184</width>
-           <height>34</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-	min-width: 180px;   /* Minimum width */
-    max-width: 180px;   /* Maximum width */
-    min-height: 30px;   /* Minimum height */
-    max-height: 30px;   /* Maximum height */
-}</string>
-         </property>
-         <property name="text">
-          <string>Remove from Shopping List</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonDisplayShoppingList">
-         <property name="geometry">
-          <rect>
-           <x>290</x>
-           <y>450</y>
-           <width>184</width>
-           <height>34</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>184</width>
-           <height>34</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>184</width>
-           <height>34</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-	min-width: 180px;   /* Minimum width */
-    max-width: 180px;   /* Maximum width */
-    min-height: 30px;   /* Minimum height */
-    max-height: 30px;   /* Maximum height */
-}</string>
-         </property>
-         <property name="text">
-          <string>Display Shopping List</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonAddToShopping">
-         <property name="geometry">
-          <rect>
-           <x>290</x>
-           <y>410</y>
-           <width>184</width>
-           <height>34</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>184</width>
-           <height>34</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>184</width>
-           <height>34</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-	min-width: 180px;   /* Minimum width */
-    max-width: 180px;   /* Maximum width */
-    min-height: 30px;   /* Minimum height */
-    max-height: 30px;   /* Maximum height */
-}</string>
-         </property>
-         <property name="text">
-          <string>Add to Shopping List</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="buttonClearDisplayList">
-         <property name="geometry">
-          <rect>
-           <x>30</x>
-           <y>80</y>
-           <width>111</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>111</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Clear List</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelListTitle">
-         <property name="geometry">
-          <rect>
-           <x>200</x>
-           <y>95</y>
-           <width>241</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
        </widget>
-       <widget class="QPushButton" name="buttonMainManagePaints">
+       <widget class="QWidget" name="verticalLayoutWidget_3">
         <property name="geometry">
          <rect>
-          <x>380</x>
-          <y>650</y>
+          <x>770</x>
+          <y>590</y>
+          <width>113</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayoutDoneAdding">
+         <item>
+          <widget class="QPushButton" name="buttonDoneAddPaint">
+           <property name="minimumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Done</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="formLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>261</width>
+          <height>351</height>
+         </rect>
+        </property>
+        <layout class="QFormLayout" name="formLayoutAddPaint">
+         <property name="horizontalSpacing">
+          <number>10</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>10</number>
+         </property>
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelBrand">
+           <property name="text">
+            <string>Brand:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="inputBrand">
+           <property name="minimumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelColor">
+           <property name="text">
+            <string>Color:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="inputColor">
+           <property name="minimumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelItemNum">
+           <property name="text">
+            <string>Item #:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="inputItemNum">
+           <property name="minimumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelType">
+           <property name="text">
+            <string>Type:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="inputType">
+           <property name="minimumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelCollection">
+           <property name="text">
+            <string>Collection:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="inputCollection">
+           <property name="minimumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>181</width>
+             <height>31</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="labelQuantity">
+           <property name="text">
+            <string>Quantity:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="inputQuantity">
+           <property name="minimumSize">
+            <size>
+             <width>31</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>31</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="labelImageText">
+           <property name="text">
+            <string>Image:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QPushButton" name="buttonUploadImage">
+           <property name="minimumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Upload</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QPushButton" name="buttonAddPaint">
+           <property name="minimumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Add Paint</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBoxManagePaints">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>891</width>
+         <height>641</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Manage Paints</string>
+       </property>
+       <widget class="QWidget" name="verticalLayoutWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>770</x>
+          <y>590</y>
+          <width>113</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayoutDoneManaging">
+         <item>
+          <widget class="QPushButton" name="buttonDoneManagePaints">
+           <property name="minimumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>111</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Done</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QTableWidget" name="paintTableWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>851</width>
+          <height>281</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelSearch">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>20</y>
+          <width>91</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Search Inventory</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonSearch">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>40</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="inputSearch">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>40</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>151</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>151</width>
+          <height>31</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonDisplayPaints">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>40</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Display All</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonDeselectAll">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>450</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Deselect All</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonSelectAll">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>410</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Select All</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonEdit">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>410</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Edit</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonDelete">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>450</y>
           <width>111</width>
           <height>30</height>
          </rect>
@@ -906,28 +743,156 @@ QPushButton {
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
-          <height>16777215</height>
+          <width>111</width>
+          <height>30</height>
          </size>
         </property>
         <property name="text">
-         <string>Manage Paints</string>
+         <string>Delete</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonRemoveFromShoppingList">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>490</y>
+          <width>184</width>
+          <height>34</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>184</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>184</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	min-width: 180px;   /* Minimum width */
+    max-width: 180px;   /* Maximum width */
+    min-height: 30px;   /* Minimum height */
+    max-height: 30px;   /* Maximum height */
+}</string>
+        </property>
+        <property name="text">
+         <string>Remove from Shopping List</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonDisplayShoppingList">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>450</y>
+          <width>184</width>
+          <height>34</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>184</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>184</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	min-width: 180px;   /* Minimum width */
+    max-width: 180px;   /* Maximum width */
+    min-height: 30px;   /* Minimum height */
+    max-height: 30px;   /* Maximum height */
+}</string>
+        </property>
+        <property name="text">
+         <string>Display Shopping List</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonAddToShopping">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>410</y>
+          <width>184</width>
+          <height>34</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>184</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>184</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	min-width: 180px;   /* Minimum width */
+    max-width: 180px;   /* Maximum width */
+    min-height: 30px;   /* Minimum height */
+    max-height: 30px;   /* Maximum height */
+}</string>
+        </property>
+        <property name="text">
+         <string>Add to Shopping List</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="buttonClearDisplayList">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>80</y>
+          <width>111</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>111</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Clear List</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelListTitle">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>95</y>
+          <width>241</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="minisTab">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <attribute name="title">
-        <string>Miniatures</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="gamesTab">
-       <attribute name="title">
-        <string>Tabletop Games</string>
-       </attribute>
-      </widget>
+      <zorder>buttonMainAddPaint</zorder>
+      <zorder>buttonMainManagePaints</zorder>
+      <zorder>groupBoxAddPaint</zorder>
+      <zorder>groupBoxManagePaints</zorder>
      </widget>
     </item>
    </layout>

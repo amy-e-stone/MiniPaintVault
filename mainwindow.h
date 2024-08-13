@@ -64,8 +64,11 @@ private:
     Ui::MainWindow *ui;
     // Create SQLite database object named 'db'
     QSqlDatabase db;
+
     // Image path for uploaded images
     QString selectedImagePath;
+    QString selectedImagePathMini;
+
     // Initialize the database (pass 'db' through the function)
     void initializeDatabase();
 };

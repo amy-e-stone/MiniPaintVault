@@ -8,6 +8,7 @@
 #include <QMessageBox> // For Help window
 #include <QDebug> //  Provides debugging information.
 #include <QIcon>
+#include <QScreen>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -21,6 +22,14 @@ MainWindow::MainWindow(QWidget *parent)
     //setWindowIcon(QIcon(":/icons/treasure-chest.png"));
     setWindowIcon(QIcon(":/icons/wizard.png"));
 
+    // Global stylesheet for all QMessageBox buttons
+    qApp->setStyleSheet(
+        "QMessageBox QPushButton {"
+        "min-width: 111px;"   // Set minimum width
+        "min-height: 28px;"   // Set minimum height
+        "}"
+        );
+
     // Enable sorting for the table widget
     ui->paintTableWidget->setSortingEnabled(true);
 
@@ -29,8 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->buttonMainManagePaints->setParent(this);
 
     // Position main menu buttons over the group boxes
-    ui->buttonMainAddPaint->move(200, 100);
-    ui->buttonMainManagePaints->move(200, 150);
+    ui->buttonMainAddPaint->move(400, 100);
+    ui->buttonMainManagePaints->move(400, 150);
 
     // Hide the group boxes by default
     ui->groupBoxAddPaint->hide();
@@ -67,8 +76,8 @@ void MainWindow::initializeDatabase()
     // Create query object which allows the execution of SQL commands (e.g., SELECT, INSERT, UPDATE, DELETE) on the connected database.
     QSqlQuery query;
 
-    // SQL command to create table in the database (if it does not exist already)
-    QString createTableQuery = "CREATE TABLE IF NOT EXISTS paints ("
+    // SQL command to create the paints table in the database (if it does not exist already)
+    QString createTablePaints = "CREATE TABLE IF NOT EXISTS paints ("
                                "id INTEGER PRIMARY KEY AUTOINCREMENT, " // Define 'id' column with auto-increment with consecutive numbers
                                "brand TEXT, "
                                "color TEXT, "
@@ -80,10 +89,11 @@ void MainWindow::initializeDatabase()
                                "image_path TEXT)";
 
     // 'query.exec()' executes insert query that was prepared above
-    if (!query.exec(createTableQuery)) {
+    if (!query.exec(createTablePaints)) {
         // 'qDebug()' starts the debug logging and is Qt specific, it is comparable to 'std::cout'
         qDebug() << "Error creating table: " << query.lastError();
     }
+
 }
 
 
@@ -316,6 +326,23 @@ void MainWindow::on_buttonClearDisplayList_clicked()
 // Delete an item from inventory
 void MainWindow::on_buttonDelete_clicked()
 {
+    int selectedCount = 0;
+
+    for (int row = 0; row < ui->paintTableWidget->rowCount(); ++row) {
+        QTableWidgetItem *checkboxItem = ui->paintTableWidget->item(row, 0);
+
+        // If the item's checkbox is selected
+        if (checkboxItem->checkState() == Qt::Checked) {
+            selectedCount++;
+        }
+    }
+
+    // If no item is selected, show an error message
+    if (selectedCount == 0) {
+        QMessageBox::warning(this, "Error", "Please select one item to delete.");
+        return;
+    }
+
     // Check to see if the user wants to delete the entry
     if (QMessageBox::question(this, "Confirm Delete", "Are you sure you want to delete the selected items?",
                               QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok) {
@@ -635,7 +662,7 @@ void MainWindow::on_buttonUploadImage_clicked()
     if (!fileName.isEmpty()) {
         // setPixmap(...): Sets the scaled image to be displayed in the labelImage widget.
         // QPixmap(fileName): Loads the image from the file path stored in fileName
-        ui->labelImage->setPixmap(QPixmap(fileName).scaled(100, 100, Qt::KeepAspectRatio));
+        ui->labelImage->setPixmap(QPixmap(fileName).scaled(125, 125, Qt::KeepAspectRatio));
         // Store the selected image path (declared in the mainwindow.h header file)
         selectedImagePath = fileName;
     }
@@ -704,10 +731,8 @@ void MainWindow::on_buttonImportCSV_clicked()
             ui->paintListWidget->addItem("Brand: " + brand + ", Color: " + color + ", Item Number: " + itemNumber + ", Type: " + type + ", Collection: " + collection + ", Quantity: " + quantity);
         }
     }
-
     file.close();
     on_buttonDisplayPaints_clicked(); // Refresh the table to show the newly imported data
-
 }
 
 
@@ -808,7 +833,6 @@ void MainWindow::on_buttonDoneAddPaint_clicked()
     ui->buttonMainManagePaints->show();
     // Show all other buttons as added ...
 }
-
 
 // Manage Paints main menu
 void MainWindow::on_buttonMainManagePaints_clicked()
