@@ -25,7 +25,5 @@ To install Mini Paint Vault on your computer:
 ## License
 This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license. This means you are free to share and adapt the code as long as you give appropriate credit, provide a link to the license, and indicate if changes were made. However, **commercial use is strictly prohibited**.
 
-See the [LICENSE](LICENSE) file for details.
-
 ## Contributing
 Contributions are welcome! Please fork this repository and submit a pull request with your changes.
