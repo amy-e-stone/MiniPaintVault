@@ -10,7 +10,7 @@
 
 ## Installation
 To install Mini Paint Vault on your computer:
-1. Download the installer from the [Installer](Installer/MiniPaintVaultInstaller.exe) directory.
+1. Download the installer from the installer directory.
 2. Run the installer and follow the on-screen instructions.
 
 ## Usage
